@@ -1,5 +1,3 @@
-# Automatizando o makefile
-
 # Nome do projeto
 PROJ_NAME=arvores
 
@@ -19,21 +17,18 @@ CC=gcc
 CC_FLAGS=-c         \
          -Wall      \
 		 -g         \
-         -pedantic
+         -Wpedantic
 
 #########################
 # Compilação e linkagem #
 #########################
-all: $(PROJ_NAME)
+all: $(PROJ_NAME) clean
 
 $(PROJ_NAME): $(OBJ)
 	$(CC) -o $@ $^
 
 %.o: %.c %.h
-	$(CC) -o $@ $< $(CC_FLAGS)
-
-main.o: main.c $(H_SOURCE)
-	$(CC) -o $@ $< $(CC_FLAGS)
+	$(CC) $(CC_FLAGS) -o $@ $<
 
 clean:
-	rm -rf *.o $(PROJ_NAME) *~
+	rm -rf *.o *~
